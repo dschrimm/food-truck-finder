@@ -11,10 +11,10 @@ getOpenFoodTrucks = (function() {
 
     var dateQuery = 'dayorder=' + currentDay;
     var endTimeQuery = '&$where=end24>=\'' + currentTime + '\'' + ' AND start24<=\''+ currentTime + '\'';
-
     var order = '&$order=applicant ASC';
     var limit = '&$limit=10';
 
+    // If no offset was entered, use 0
     if (!process.argv[2]) {
         process.argv[2] = 0;
     }
@@ -25,6 +25,7 @@ getOpenFoodTrucks = (function() {
         if (error || body.error) {
             console.log('Sorry, something went wrong and we couldn\'t get the list of open food trucks for you.');
         } else {
+            // Add each truck to the list of trucks to print
             var trucks = [];
             for(i=0; i<body.length; i++) {
                 trucks.push({
