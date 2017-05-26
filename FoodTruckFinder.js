@@ -32,7 +32,7 @@ getOpenFoodTrucks = (function() {
                     location: body[i].location
                 });
             }
-            console.log(columnify(trucks));
+            console.log(columnify(trucks, {minWidth: 30, maxWidth: 60}));
         }
     });
 })();
