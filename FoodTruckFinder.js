@@ -14,11 +14,12 @@ getOpenFoodTrucks = (function() {
     var order = '&$order=applicant ASC';
     var limit = '&$limit=10';
 
-    // If no offset was entered, use 0
-    if (!process.argv[2]) {
-        process.argv[2] = 0;
+    // If no or invalid offset was entered, use 0
+    var offsetValue = parseInt(process.argv[2]);
+    if (!offsetValue) {
+        offsetValue = 0;
     }
-    var offset = '&$offset=' + process.argv[2] * 10;
+    var offset = '&$offset=' + offsetValue * 10;
 
     request('http://data.sfgov.org/resource/bbb8-hzi6.json?' + dateQuery + endTimeQuery + order + limit + offset, function (error, response, body) {
         body = JSON.parse(body);
